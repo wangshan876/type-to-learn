@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本朗读模块示例</title>
+    <script type="module">
+        import TextToSpeech from "../textToSpeech.js"
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tts = TextToSpeech;
+            tts.init('ttsContainer');
+
+            // 添加朗读按钮
+            const speakButton = document.querySelector('#speakButton');
+
+            // 朗读按钮的点击事件
+            speakButton.addEventListener('click', () => {
+                const text = 'こんにちは！'; // 直接传入文本
+                tts.speak(text);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="ttsContainer"></div>
+    <button id="speakButton">朗读</button>
+</body>
+</html>

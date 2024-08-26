@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module">
+        import { createChatModule } from '../gpt/chatView.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatModule = createChatModule('chat-container');
+
+            // 你可以使用 chatModule.chat() 来调用 chat 函数
+            chatModule.chat('','你好','test');
+        });
+    </script>
+</head>
+
+<body>
+    <div id="chat-container"></div>
+    <div id="test"></div>
+</body>
+
+</html>

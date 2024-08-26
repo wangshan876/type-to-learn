@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>左侧自动弹出菜单</title>
+</head>
+<body>
+
+    <button id="toggle-button">切换菜单</button>
+
+    <div id="menu" class="myapp-popup-menu">
+        <a href="#">首页</a>
+        <a href="#">关于我们</a>
+        <a href="#">服务</a>
+        <a href="#">联系</a>
+    </div>
+
+    <script src="../popMenu.js"></script>
+    <script>
+        // 初始化菜单组件，设置是否使用popup-indicator
+        const menu = new PopupMenu('menu', { position: 'left', useIndicator: true });
+
+        // 绑定切换按钮
+        document.getElementById('toggle-button').addEventListener('click', () => {
+            menu.toggle();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB 示例</title>
+    <script type="module">
+        import { IndexedDBModule } from '../autoSaveIndexedDB.js';
+
+        const dbModule = new IndexedDBModule("myDatabase", "formData");
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("saveButton").onclick = function() {
+                dbModule.handleSaveButtonClick("formContainer");
+            };
+        });
+    </script>
+</head>
+<body>
+    <div id="formContainer">
+        <input type="text" id="input1" value="文本输入">
+        <input type="checkbox" name="checkboxGroup" value="选项1"> 选项1
+        <input type="checkbox" name="checkboxGroup" value="选项2"> 选项2
+        <input type="radio" name="radioGroup" value="单选1"> 单选1
+        <input type="radio" name="radioGroup" value="单选2"> 单选2
+        <select id="select1">
+            <option value="选项A">选项A</option>
+            <option value="选项B">选项B</option>
+        </select>
+    </div>
+    <button id="saveButton">保存到 IndexedDB</button>
+</body>
+</html>
