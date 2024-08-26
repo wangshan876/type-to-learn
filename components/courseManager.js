@@ -1,6 +1,6 @@
 // courseManager.js
 let dbModule = null
-export async function createCourseManager(containerId,db) {
+export async function createCourseManager(containerId, db) {
     dbModule = db
     const container = document.getElementById(containerId);
     renderHTML(container);
@@ -9,82 +9,87 @@ export async function createCourseManager(containerId,db) {
 
 function renderHTML(container) {
     container.innerHTML = `
-        <style>
-            .course-manager {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 20px;
-            }
-            .course-manager h1 {
-                text-align: center;
-                color: #333;
-            }
-            .course-manager .tabs {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 20px;
-            }
-            .course-manager .tab-button {
-                cursor: pointer;
-                padding: 10px 20px;
-                border: none;
-                background-color: #007bff;
-                color: white;
-                margin: 0 5px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-            .course-manager .tab-button:hover {
-                background-color: #0056b3;
-            }
-            .course-manager .tab-button.active {
-                background-color: #0056b3;
-            }
-            .course-manager .tab {
-                display: none;
-                background-color: white;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            }
-            .course-manager .active {
-                display: block;
-            }
-            .course-manager label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
-            .course-manager input[type="text"],
-            .course-manager textarea {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-sizing: border-box;
-            }
-            .course-manager button {
-                padding: 10px 15px;
-                border: none;
-                background-color: #28a745;
-                color: white;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            .course-manager button:hover {
-                background-color: #218838;
-            }
-            .course-manager #output {
-                background-color: #f8f9fa;
-                padding: 10px;
-                border-radius: 5px;
-                white-space: pre-wrap;
-                overflow: auto;
-            }
-        </style>
+<style>
+    .course-manager {
+        font-family: Arial, sans-serif;
+        background-color: #121212; /* 背景色 */
+        margin: 0;
+        padding: 20px;
+        color: #ffffff; /* 文字颜色 */
+    }
+    .course-manager h1 {
+        text-align: center;
+        color: #ffffff; /* 标题颜色 */
+    }
+    .course-manager .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .course-manager .tab-button {
+        cursor: pointer;
+        padding: 10px 20px;
+        border: none;
+        background-color: #007bff; /* 按钮背景色 */
+        color: white;
+        margin: 0 5px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .course-manager .tab-button:hover {
+        background-color: #0056b3; /* 悬停时的背景色 */
+    }
+    .course-manager .tab-button.active {
+        background-color: #0056b3; /* 激活状态的背景色 */
+    }
+    .course-manager .tab {
+        display: none;
+        background-color: #1e1e1e; /* 标签背景色 */
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* 阴影效果 */
+    }
+    .course-manager .active {
+        display: block;
+    }
+    .course-manager label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #ffffff; /* 标签颜色 */
+    }
+    .course-manager input[type="text"],
+    .course-manager textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #444; /* 输入框边框颜色 */
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #1e1e1e; /* 输入框背景色 */
+        color: #ffffff; /* 输入框文字颜色 */
+    }
+    .course-manager button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #28a745; /* 按钮背景色 */
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .course-manager button:hover {
+        background-color: #218838; /* 悬停时的背景色 */
+    }
+    .course-manager #output {
+        background-color: #1e1e1e; /* 输出区域背景色 */
+        padding: 10px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        overflow: auto;
+        color: #ffffff; /* 输出区域文字颜色 */
+    }
+</style>
         <div class="course-manager">
             <h1>课程管理</h1>
             <div class="tabs">
@@ -108,7 +113,7 @@ function renderHTML(container) {
 }
 
 async function bindEvents(container) {
-  
+
     const saveTab = container.querySelector('#saveTab');
     const loadTab = container.querySelector('#loadTab');
     const saveButton = container.querySelector('#saveButton');
@@ -146,7 +151,7 @@ async function bindEvents(container) {
 
         const lessonsArray = lessonContent.split('\n').map(item => item.trim()).filter(item => item);
         // 假设 dbModule 是一个已定义的 IndexedDB 模块
-        
+
         dbModule.saveData(lessonsArray, directoryName).then(() => {
             alert('课程保存成功！');
             container.querySelector('#directoryName').value = '';
@@ -173,9 +178,9 @@ async function loadCourses() {
             return;
         }
 
-        results.forEach((course,index) => {
+        results.forEach((course, index) => {
             const courseElement = document.createElement('div');
-            courseElement.id = "course-"+index
+            courseElement.id = "course-" + index
             courseElement.style.marginBottom = '20px';
             courseElement.style.padding = '10px';
             courseElement.style.border = '1px solid #ccc';

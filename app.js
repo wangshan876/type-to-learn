@@ -32,6 +32,7 @@ let hintPrompt=`请分析输入日语句子的句型结构，输出时只输出�
 
 // 更新翻译内容
 async function updateTranslation(sentence) {
+    if(!sentence) return;
     const text = sentence?sentence: document.getElementById('typeComponent').getAttribute('data-sentence');
     transcard.innerHTML = ''
     translatePromptTA.value && (translatePrompt = translatePromptTA.value)
@@ -156,7 +157,6 @@ function init_course_select(){ //courseSelect
 function getSentences(){
         const _select = document.getElementById('course-select')
         const selectedId = _select.value;
-        console.log(_select)
         if(_select.value == 'none') {
             sentences = japanese_sentences
             return;

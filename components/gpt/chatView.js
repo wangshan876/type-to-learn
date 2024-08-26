@@ -37,8 +37,8 @@ export function createChatModule(id) {
                 <div class="api-providers">
                     <label for="api-select">服务提供商:</label>
                     <select id="api-select">
-                        <option value="ollama" >ollama</option>
-                        <option value="deepseek" selected>deepseek</option>
+                        <option value="ollama" selected >ollama</option>
+                        <option value="deepseek" >deepseek</option>
                     </select>
                 </div>
                 <div id="ollama-models" style="display: none;">
